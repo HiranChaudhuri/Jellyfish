@@ -1,0 +1,14 @@
+{
+	"identifier" = "com.example.Jellyfish";
+	"required_oolite_version" = "1.90";
+	"title" = "Demo Jellyfish";
+	"version" = "0.1";
+	"category" = "Ambience";
+	"description" = "yada yada Jellyfish yada yada I love Jellyfish";
+	//"download_url" = "https://wiki.alioth.net/img_auth.php/7/74/Oolite.oxp.LittleBear.GalacticAlmanac.oxz";
+	"author" = "SomeAuthor";
+	//"file_size" = "1190000";
+	"license" = "CC BY-NC-SA 4.0";
+	//"upload_date" = "2022-07-07 12:39:41";
+	"conflict_oxps" = ();
+} 
