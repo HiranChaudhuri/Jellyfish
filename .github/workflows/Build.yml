@@ -1,0 +1,45 @@
+# This workflow will build an  OXZ (Zip packaged Oolite Expansion)
+
+name: Build
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0
+
+      - name: Check filesystem before build
+        run: |
+          find .
+
+      - name: Build package
+        run: |
+          ./build.sh
+
+      - name: Check filesystem after build
+        run: |
+          find .
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: OoliteExpansion
+          path: target/OoliteAddonScanner-${{ env.GITVERSION_SEMVER }}-executable.oxp
+

@@ -10,5 +10,7 @@
 	//"file_size" = "1190000";
 	"license" = "CC BY-NC-SA 4.0";
 	//"upload_date" = "2022-07-07 12:39:41";
+	"requires_oxps" = ();
+	"optional_oxps" = ();
 	"conflict_oxps" = ();
 } 
