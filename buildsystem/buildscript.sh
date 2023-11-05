@@ -41,5 +41,5 @@ fi
 
 pushd .
 cd ${OXPDIR}
-zip -9rq ../../../$OXZFILE *
+zip -9rq ../../$OXZFILE *
 popd

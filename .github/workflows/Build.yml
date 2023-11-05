@@ -33,6 +33,9 @@ jobs:
       - name: Build package
         run: |
           ./build.sh
+        env:
+          VERSION: ${{ env.GITVERSION_SEMVER }}
+          OXPNAME: ${{ github.event.repository.name }}
 
       - name: Check filesystem after build
         run: |
@@ -41,5 +44,26 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: OoliteExpansion
-          path: target/OoliteAddonScanner-${{ env.GITVERSION_SEMVER }}-executable.oxp
+          path: buildtmp/*.oxz
+
+      - name: Remove old releases
+        uses: s00d/delete-older-releases@0.2.1
+        with:
+          keep_latest: 5
+          delete_tag_pattern: v
+          delete_type: 'release'
+          target_branch: '${{ github.ref_name }}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Create release
+        id: create_prerelease
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "v${{ env.GITVERSION_SEMVER }}"
+          prerelease: false
+          title: "${{ github.event.repository.name }} v${{ env.GITVERSION_SEMVER }}"
+          files: |
+            buildtmp/*.oxz
 
